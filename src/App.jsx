@@ -6,39 +6,71 @@ function App() {
 
   let suits = ["clubs", "diamonds", "hearts", "spades"];
 
-  const [dealerScore, setDealerScore] = useState(0);
-  const [dealCard, setDealCard] = useState(0);
+  const [dealerScore, setDealerScore] = useState([]);
+  const [dealCard, setDealCard] = useState([]);
 
-  const [playerScore, setplayerScore] = useState(0);
-  const [playerCard, setplayerCard] = useState(0);
+  const [playerScore, setplayerScore] = useState([]);
+  const [playerCard, setplayerCard] = useState([]);
+
+  const [gameStart , setGameStart] = useState(false);
+  const [message, setMessage] = useState('Want to play a round?');
 
   const hitCard = () => {
     let newCard = Math.floor(Math.random() * (13 - 1) + 1);
+
     return newCard;
   };
 
+  
+
   const handleStartGame = () => {
-    let dealerCardValue = hitCard();
 
-    setDealCard(dealerCardValue);
-    setDealerScore(dealerCardValue);
+    setGameStart(true);
 
-    let playerCardValue = hitCard();
-    setplayerCard(playerCardValue);
-    setplayerScore(playerCardValue)
+    setMessage("Want to draw a card new card?")
+
+    let dealerCardValue =   hitCard() ;
     
-  }
+    setDealCard([...dealCard, dealerCardValue]);
+
+    if(dealerCardValue >= 11) dealerCardValue = 10
+
+    setDealerScore([...dealerScore, dealerCardValue]);
+
+    let playerCardValue1 = hitCard();
+
+    let playerCardValue2 = hitCard();
+   
+    setplayerCard([...playerCard,playerCardValue1, playerCardValue2]);
+
+    if(playerCardValue1 >= 11) playerCardValue1 = 10
+    if(playerCardValue1 == 1) playerCardValue1 = 11
+    if(playerCardValue2 >= 11) playerCardValue2 = 10
+    if(playerCardValue2 == 1) playerCardValue2 = 11
+
+    setplayerScore([...playerScore ,playerCardValue1 , playerCardValue2]);
+
+    
+  };
 
   return (
     <main>
       <h1>Blackjack Js</h1>
-      <p>Want to play a round?</p>
+      <p>{message}</p>
 
       <DealerDisplay dealerScore={dealerScore} dealCard={dealCard}/>
 
-      <PlayerDisplay playerScore={playerScore} playerCard={playerCard}/>
+      <PlayerDisplay playerScore={playerScore} playerCard={playerCard} gameStart={gameStart}/>
 
-      <button onClick={handleStartGame}>Start Game</button>
+      {
+        !gameStart ? <button onClick={handleStartGame}>Start Game</button>
+        : <>
+            <button>New Card</button> 
+            <button>Stand</button>          
+          </> 
+      }
+
+      
       
     </main>
   )

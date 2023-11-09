@@ -27,6 +27,9 @@ h1{
   text-align: center;
   margin: 20px 0;
 }
+p{
+  text-align: center;
+}
 .cardsContainer{
   display: flex;
   flex-wrap: wrap;

@@ -1,14 +1,16 @@
 
 const DealerDisplay = ({dealerScore  , dealCard}) => {
 
-  const imagenSrc = "../../public/images/";
+  const imagenSrc = "/images/";
 
   const suits = ["clubs", "diamonds", "hearts", "spades"];
-  let randomSuit = suits[Math.floor(Math.random(3))]
+  let randomSuit = suits[Math.floor(Math.random() * 4)]
+
+  let scoreToDisplay = dealerScore.reduce((a, b) => a + b , 0)
   
   return (
     <div>
-        <p>Dealer: {dealerScore}</p>
+        <p>Dealer: {scoreToDisplay}</p>
 
         <div className="cardsContainer">
 
