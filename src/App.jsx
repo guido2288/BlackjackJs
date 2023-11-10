@@ -5,8 +5,6 @@ import PlayerDisplay from "./components/PlayerDisplay"
 
 function App() {
 
-  let suits = ["clubs", "diamonds", "hearts", "spades"];
-
   const [dealerScore, setDealerScore] = useState([]);
   const [dealCard, setDealCard] = useState([]);
 
