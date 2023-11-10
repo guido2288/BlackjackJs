@@ -3,9 +3,6 @@ const DealerDisplay = ({dealerScore  , dealCard}) => {
 
   const imagenSrc = "/images/";
 
-  const suits = ["clubs", "diamonds", "hearts", "spades"];
-  let randomSuit = suits[Math.floor(Math.random() * 4)]
-
   let scoreToDisplay = dealerScore.reduce((a, b) => a + b , 0)
   
   return (
@@ -16,10 +13,20 @@ const DealerDisplay = ({dealerScore  , dealCard}) => {
 
           {
             dealCard == 0 ? <img src={`${imagenSrc}card-back1.png`}/> 
-            : <img src={`${imagenSrc}card-${randomSuit}-${dealCard}.png`}/> 
+            :
+            
+            <>
+              {
+                dealCard.map((card , idx) => {
+                  return(
+                    <img key={idx} src={`${imagenSrc}card-clubs-${card}.png`}/> 
+                  )
+                })
+              }
+            </>
+            
           }
-          <img src={`${imagenSrc}card-back1.png`}/> 
-
+          
          
        
         </div>

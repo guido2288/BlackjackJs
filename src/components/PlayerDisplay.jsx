@@ -3,11 +3,6 @@ const PlayerDisplay = ({playerScore , playerCard , gameStart}) => {
 
   const imagenSrc = "/images/";
 
-  const suits = ["clubs", "diamonds", "hearts", "spades"];
-  let randomSuit = suits[Math.floor(Math.random() * 4)];
-
-  console.log(playerScore)
-
   let scoreToDisplay = playerScore.reduce((a, b) => a + b , 0)
 
   return (
@@ -21,7 +16,7 @@ const PlayerDisplay = ({playerScore , playerCard , gameStart}) => {
               {
                 playerCard.map((card , idx) => {
                   return(
-                    <img key={idx} src={`${imagenSrc}card-${randomSuit}-${card}.png`}/> 
+                    <img key={idx} src={`${imagenSrc}card-clubs-${card}.png`}/> 
                   )
                 })
               }
