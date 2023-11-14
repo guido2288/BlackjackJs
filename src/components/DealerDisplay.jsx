@@ -14,7 +14,7 @@ const DealerDisplay = ({dealerScore  , dealCard}) => {
           {
             dealCard == 0 ? <img src={`${imagenSrc}card-back1.png`}/> 
             :
-            
+    
             <>
               {
                 dealCard.map((card , idx) => {
@@ -27,8 +27,6 @@ const DealerDisplay = ({dealerScore  , dealCard}) => {
             
           }
           
-         
-       
         </div>
 
     </div>

@@ -1,4 +1,3 @@
-
 const PlayerDisplay = ({playerScore , playerCard , gameStart}) => {
 
   const imagenSrc = "/images/";

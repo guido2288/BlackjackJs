@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import confetti from 'canvas-confetti'
 import DealerDisplay from "./components/DealerDisplay"
 import PlayerDisplay from "./components/PlayerDisplay"
+import ScoreModal from "./components/ScoreModal";
 
 function App() {
 
@@ -14,13 +15,13 @@ function App() {
   const [gameStart , setGameStart] = useState(false);
   const [message, setMessage] = useState('Want to play a round?');
 
+  const [gameResult, setGameResult] = useState(null);
+
   const hitCard = () => {
     let newCard = Math.floor(Math.random() * (13 - 1) + 1);
 
     return newCard;
   };
-
-  
 
   const handleStartGame = () => {
 
@@ -61,6 +62,7 @@ function App() {
     if (newCardDraw == 1) newCardDraw = 1;
     
     setplayerScore([...playerScore, newCardDraw]);
+
   }
 
   const handleStand = () => {
@@ -77,34 +79,43 @@ function App() {
 
   const checkwinner = (player , dealer) => {
 
-
-
     if(player === 21){
       confetti()
-      return alert("ganaste!")
+      return setGameResult("You Win!")
     }
     if(dealer === 21){
-      return alert("Perdiste")
+      return setGameResult("You Lost!")
     }
     if(player > 21){
-      return alert("Perdiste")
+      return setGameResult("You Lost!")
     }
     if(dealCard > 21){
-      return alert("ganaste!")
+      return setGameResult("You Lost!")
     }
 
     if((player - 21) > (dealer - 21)){
       confetti()
-      return alert("ganaste!")
+      return setGameResult("You Win!")
     }
 
     if((dealer - 21) > (player - 21)){
-      return alert("perdiste!")
+      return setGameResult("You Lost!")
     }
 
     if(dealer == player){
-      return alert("empate!")
+      return setGameResult("Tied Game")
     }
+  }
+
+  const resetGame = () => {
+    setDealerScore([])
+    setDealCard([])
+
+    setplayerScore([])
+    setplayerCard([])
+
+    setGameStart(false)
+    setGameResult(null)
   }
 
   useEffect(() => {
@@ -131,17 +142,12 @@ function App() {
           checkwinner(scorePlayerTotal,scoreDealerTotal )
         }, 1000)
 
-        
       }
-
     
     }
 
-
+  }, [dealCard , playerCard])
   
-  }, [dealCard])
-  
-
   return (
     <main>
       <h1>Blackjack Js</h1>
@@ -159,6 +165,7 @@ function App() {
           </> 
       }
 
+      <ScoreModal gameResult={gameResult} resetGame={resetGame}/>
       
       
     </main>
