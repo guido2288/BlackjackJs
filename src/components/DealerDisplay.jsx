@@ -1,7 +1,7 @@
 
 const DealerDisplay = ({dealerScore  , dealCard}) => {
 
-  const imagenSrc = "/images/";
+  const imagenSrc = "images/";
 
   let scoreToDisplay = dealerScore.reduce((a, b) => a + b , 0)
   

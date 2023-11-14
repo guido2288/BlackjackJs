@@ -1,6 +1,6 @@
 const PlayerDisplay = ({playerScore , playerCard , gameStart}) => {
 
-  const imagenSrc = "/images/";
+  const imagenSrc = "images/";
 
   let scoreToDisplay = playerScore.reduce((a, b) => a + b , 0)
 
